@@ -109,5 +109,3 @@ Logs from services can be routed to `logs-service`.
 - 📆 Use **Nx** or **Turborepo** for monorepo management
 
 ---
-
-Would you like examples for `Dockerfile`, `k8s deployment.yaml`, or `docker-compose.yml` next?
