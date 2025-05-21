@@ -8,6 +8,7 @@
 }
 body {
   background-color: rgb(255, 235, 205);
+  max-height: 100vh;
 }
 header {
   background-color: rgb(188, 143, 143);
@@ -42,15 +43,6 @@ hr {
   border: 1px solid rgb(200, 180, 150);
   margin: 20px 0;
 }
-footer {
-  text-align: center;
-  padding: 10px 0;
-  background-color: #f2dede;
-}
-footer p {
-  font-size: 0.9rem;
-  color: #555;
-}
 main {
   display: flex;
   justify-content: space-between;
@@ -78,7 +70,15 @@ main {
   align-items: center;
   flex-direction: column;
   border: 1px solid #ccc;
+  border-radius: 10px;
+  box-sizing: border-box;
   justify-content: center;
+}
+
+#quote,
+#author {
+  margin: 1rem;
+  padding: 1rem;
 }
 .agent {
   flex: 1;
@@ -184,4 +184,20 @@ button:disabled {
   color: white;
   border-radius: 5px;
   cursor: pointer;
+}
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 15px 0 15px 0;
+  padding-top: 15px 0 15px 0;
+  height: 9vh;
+  box-sizing: border-box;
+  width: 100%;
+  background-color: #d4606011;
+}
+footer p {
+  color: black;
+  font-size: 1rem;
+  bottom: 0;
 }

@@ -1,39 +1,20 @@
-const quotes = [
-  "Believe in yourself!",
-  "Stay positive, work hard, make it happen.",
-  "Every moment is a fresh beginning.",
-  "Success is not final; failure is not fatal.",
-  "Dream big and dare to fail.",
-];
+const api_url = "http://localhost:8000/api/quotes";
 
-const randomIndex = Math.floor(Math.random() * quotes.length);
-const randomTextElement = document.getElementById("quote");
-
-randomTextElement.textContent = quotes[randomIndex];
-function sendMessage() {
-  const input = document.getElementById("user-input");
-  const chatBox = document.getElementById("chat-box");
-
-  if (input.value.trim() !== "") {
-    const message = document.createElement("p");
-    message.textContent = input.value;
-    chatBox.appendChild(message);
-    input.value = "";
-
-    // Auto-scroll to bottom
-    chatBox.scrollTop = chatBox.scrollHeight;
-  }
+async function getquotes(url) {
+  const response = await fetch(url);
+  const data = await response.json();
+  return data;
 }
+
+async function displayQuote() {
+  const quotes = await getquotes(api_url);
+  const randomIndex = Math.floor(Math.random() * quotes.length);
+  const randomTextElement = document.getElementById("quote");
+  randomTextElement.textContent = quotes[randomIndex].q;
+  const randomAuthorElement = document.getElementById("author");
+  randomAuthorElement.textContent = "Author: " + quotes[randomIndex].a;
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-  const dateElement = document.getElementById("current-date");
-
-  const today = new Date();
-  const formattedDate = today.toLocaleDateString("en-IN", {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-
-  dateElement.textContent = formattedDate;
+  displayQuote();
 });
