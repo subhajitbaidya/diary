@@ -36,7 +36,7 @@ header {
   flex-grow: 1;
   box-sizing: border-box;
   background-color: #fdf5e6;
-  border: 1px solid black;
+  border: 1px ridge #dcdcdc;
   padding: 2rem;
   min-height: 60%;
   height: 30em;
@@ -92,6 +92,7 @@ nav ul {
   list-style-type: none;
 }
 nav ul li a {
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
   text-decoration: none;
   border: none;
   padding: 8px 16px;
@@ -125,8 +126,9 @@ main {
   justify-content: space-evenly;
   align-items: center;
 }
-.randombox {
+#randomText {
   flex: 1;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
   margin: 12px;
   padding: 5px;
   height: 200px;
@@ -148,6 +150,7 @@ main {
 .agent {
   flex: 1;
   margin: 12px;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
   padding: 5px;
   height: 200px;
   border: 1px solid #ccc;
@@ -159,6 +162,7 @@ main {
   padding: 10px;
 }
 textarea {
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
   width: 100%;
   height: 100%;
   padding: 15px;

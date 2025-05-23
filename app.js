@@ -4,28 +4,26 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
-  // try {
-  //   const response = await fetch("http://localhost:5000/login", {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({ email, password }),
-  //     credentials: "include", // if using cookies
-  //   });
+  try {
+    const response = await fetch("http://localhost:8000/user/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+      credentials: "include",
+    });
 
-  //   const data = await response.json();
+    const data = await response.json();
 
-  //   if (response.ok) {
-  //     // Hide login and show main
-  //     document.getElementById("loginSection").style.display = "none";
-  //     document.getElementById("mainSection").style.display = "block";
-  //   } else {
-  //     alert(data.error || "Login failed");
-  //   }
-  // } catch (err) {
-  //   alert("Network error");
-  // }
-  document.getElementById("loginSection").style.display = "none";
-  document.getElementById("main").style.display = "flex";
+    if (response.ok) {
+      document.getElementById("loginSection").style.display = "none";
+      document.getElementById("nav").style.display = "block";
+      document.getElementById("main").style.display = "flex";
+    } else {
+      alert(data.error || "Login failed");
+    }
+  } catch (err) {
+    console.error(err);
+  }
 });
 let isLogin = true;
 

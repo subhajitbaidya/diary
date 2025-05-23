@@ -12,14 +12,14 @@
 </head>
 
 <body>
-  <header>
+  <header id="header">
     <div class="logo">
       <img src="images/logo.png" width="150" height="100" alt="Dear Diary Logo" title="logo.html">
     </div>
-    <nav>
+    <nav id="nav" style="display: none;">
       <ul>
-        <li><a href="#confession">Your Pages</a></li>
-        <li><a href="#analytics">Your Progress Analytics</a></li>
+        <li><a id="confession">Your Pages</a></li>
+        <li><a id="analytics">Your Progress Analytics</a></li>
       </ul>
     </nav>
 
@@ -50,7 +50,7 @@
         <button class="button" onclick="storeMessage()">Done</button>
       </div>
       <div class="container">
-        <div class="randombox" id="randomText">
+        <div id="randomText">
           <p id="quote">Loading....</p>
           <br>
           <p id="author">Loading....</p>
