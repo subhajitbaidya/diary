@@ -75,6 +75,15 @@ If you're someone who's learning or just curious — **feel free to explore this
 
 ---
 
+## 🪒 Feature Breakdown
+
+- Login/Sign up User
+- Diary page for user to write articles
+- Display quotes from an external API.
+- Chat box for interacting with an ML model
+
+---
+
 ## ⚙️ Tech Stack
 
 - Node.js + Express
@@ -104,3 +113,77 @@ npm install
 npm run dev
 
 ```
+
+---
+
+## 🪒 Learnings
+
+- For interacting with data from front end to back end, we need to configure CORS.
+- I am following an SPA approach for this app. Therefore, the components are dynamically rendered.
+- Display quotes from an external API.
+- Chat box for interacting with an ML model
+
+---
+
+## 🪒 Things to Learn
+
+✅ What Is SPA?
+A Single Page Application dynamically updates the content of a single HTML page without refreshing or navigating to different files.
+
+- Loads index.html once.
+- Uses JavaScript to show/hide different "pages" (sections).
+- Communicates with the backend via fetch or XMLHttpRequest.
+
+✅ Benefits of This Approach:
+
+- No page reloads.
+- Simpler navigation experience.
+- Great for small to medium projects.
+
+🧠 Things to implement:
+
+- Adding localStorage or sessionStorage to persist login.
+- Dynamically injecting HTML with JavaScript (instead of hiding/showing).
+- Using history.pushState() for URL changes without reload.
+
+---
+
+✅ 2. JWT Authentication Flow of Login/Sign up
+
+- Generate tokens in backend
+- Verify the token
+- Return the token in cookies or headers
+
+Sign up/Login Handler:
+
+- Check if user exists
+- If not, create and store in MongoDB
+- Generate JWT and send it in cookie
+- Implement middleware to protect routes
+
+✅ 4. First-Time User Flow
+
+- On sign up: check if email exists in DB.
+- If not: create user, set JWT, redirect/render main app.
+
+---
+
+## 🧠 Challenges I faced while developing
+
+Problem: I was doing this `<span id="toggletext">Don't have an account? <a href="#" id="toggleLink">Sign up</a> </span>` and modifying it with Javascript which was not preserving the link from the anchor tag. The solution is to bind the event listener in a function.
+
+🔁 Why we Need to Rebind the Event Listener?
+
+toggleText.innerHTML = `Already have an account? <a href="#" id="toggleLink">Login</a>`;
+
+Replacing the entire content of the #toggletext element, including the `<a>` tag inside it. This means:
+
+- The original `<a id="toggleLink">` is destroyed and replaced with a new one.
+- JavaScript event listeners are not preserved when elements are recreated like this.
+- So even though the new HTML looks the same visually, it’s a completely new DOM element without any event attached.
+
+🔧 Rebinding Is Needed Because:
+
+- JavaScript does not automatically attach event listeners to newly created elements. That’s why after modifying .innerHTML, you need to do this again:
+
+`document.getElementById("toggleLink").addEventListener("click", toggleLoginSignup);`
