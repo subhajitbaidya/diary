@@ -18,7 +18,7 @@
     </div>
     <nav>
       <ul>
-        <li><a href="#confession">Want us to know your story?</a></li>
+        <li><a href="#confession">Your Pages</a></li>
         <li><a href="#analytics">Your Progress Analytics</a></li>
       </ul>
     </nav>
@@ -26,30 +26,47 @@
 
   </header>
 
-  <main>
-    <div class="message">
-      <textarea placeholder="Start writing your blog or message here..."></textarea>
-      <button class="button">Done</button>
-    </div>
-    <div class="container">
-      <div class="randombox" id="randomText">
-        <p id="quote">Loading....</p>
-        <br>
-        <p id="author">Loading....</p>
-      </div>
-      <div class="agent">
-        <div id="chat-box" class="chat-box"></div>
-        <div class="chat-input">
-          <input type="text" id="user-input" placeholder="Type a message..." />
-          <button onclick="sendMessage()">Send</button>
+  <div class="wrapper">
+
+    <section id="loginSection">
+      <div id="login">
+        <div class="loginlogo">
+          <img src="images/logo.png" width="150" height="100" alt="Dear Diary Logo" title="logo.html">
         </div>
+        <form id="loginForm">
+          <input type="email" id="email" placeholder="Email" required />
+          <input type="password" id="password" placeholder="Password" required />
+          <button type="submit">Login</button>
+        </form>
       </div>
+    </section>
 
-  </main>
+    <main style="display: none;">
+      <div class="message">
+        <textarea id="userMessage" placeholder="Start writing your blog or message here..."></textarea>
+        <button class="button" onclick="storeMessage()">Done</button>
+      </div>
+      <div class="container">
+        <div class="randombox" id="randomText">
+          <p id="quote">Loading....</p>
+          <br>
+          <p id="author">Loading....</p>
+        </div>
+        <div class="agent">
+          <div id="chat-box" class="chat-box"></div>
+          <div class="chat-input">
+            <input type="text" id="user-input" placeholder="Type a message..." />
+            <button onclick="sendMessage()">Send</button>
+          </div>
+        </div>
 
-  <footer>
-    <p>You can be yourself here!</p>
-  </footer>
+    </main>
+
+    <footer>
+      <p>You can be yourself here!</p>
+    </footer>
+
+  </div>
   <script src="app.js"></script>
 </body>
 

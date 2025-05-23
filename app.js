@@ -14,6 +14,33 @@ async function displayQuote() {
   const randomAuthorElement = document.getElementById("author");
   randomAuthorElement.textContent = "Author: " + quotes[randomIndex].a;
 }
+async function storeMessage() {
+  const message = document.getElementById("userMessage").value;
+
+  const confirmation = confirm("Want to save this article?");
+  if (confirmation) {
+    try {
+      const response = await fetch("http://localhost:8000/api/diary/text", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ text: message }),
+      });
+
+      if (response.ok) {
+        alert("Message saved successfully!");
+      } else {
+        alert("Failed to save message.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("An error occurred while saving the message.");
+    }
+  } else {
+    return null;
+  }
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   displayQuote();
