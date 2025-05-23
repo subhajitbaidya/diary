@@ -36,12 +36,15 @@
         <form id="loginForm">
           <input type="email" id="email" placeholder="Email" required />
           <input type="password" id="password" placeholder="Password" required />
-          <button type="submit">Login</button>
+          <button type="submit" id="loginbutton">Login</button>
+
         </form>
+        <br>
+        <span id="toggletext">Don't have an account? <a href="#" id="toggleLink">Sign up</a> </span>
       </div>
     </section>
 
-    <main style="display: none;">
+    <main id="main" style="display: none;">
       <div class="message">
         <textarea id="userMessage" placeholder="Start writing your blog or message here..."></textarea>
         <button class="button" onclick="storeMessage()">Done</button>

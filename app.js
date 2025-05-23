@@ -1,3 +1,59 @@
+document.getElementById("loginForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  // try {
+  //   const response = await fetch("http://localhost:5000/login", {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({ email, password }),
+  //     credentials: "include", // if using cookies
+  //   });
+
+  //   const data = await response.json();
+
+  //   if (response.ok) {
+  //     // Hide login and show main
+  //     document.getElementById("loginSection").style.display = "none";
+  //     document.getElementById("mainSection").style.display = "block";
+  //   } else {
+  //     alert(data.error || "Login failed");
+  //   }
+  // } catch (err) {
+  //   alert("Network error");
+  // }
+  document.getElementById("loginSection").style.display = "none";
+  document.getElementById("main").style.display = "flex";
+});
+let isLogin = true;
+
+function toggleLoginSignup(e) {
+  e.preventDefault();
+  const btn = document.getElementById("loginbutton");
+  const toggleText = document.getElementById("toggletext");
+
+  if (isLogin) {
+    btn.textContent = "Signup";
+    toggleText.innerHTML = `Already have an account? <a href="#" id="toggleLink">Login</a>`;
+  } else {
+    btn.textContent = "Login";
+    toggleText.innerHTML = `Don't have an account? <a href="#" id="toggleLink">Sign up</a>`;
+  }
+
+  isLogin = !isLogin;
+
+  document
+    .getElementById("toggleLink")
+    .addEventListener("click", toggleLoginSignup);
+}
+
+// Initial binding
+document
+  .getElementById("toggleLink")
+  .addEventListener("click", toggleLoginSignup);
+
 const api_url = "http://localhost:8000/api/quotes";
 
 async function getquotes(url) {
