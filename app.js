@@ -1,30 +1,3 @@
-document.getElementById("loginForm").addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-
-  try {
-    const response = await fetch("http://localhost:8000/user/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-      credentials: "include",
-    });
-
-    const data = await response.json();
-
-    if (response.ok) {
-      document.getElementById("loginSection").style.display = "none";
-      document.getElementById("nav").style.display = "block";
-      document.getElementById("main").style.display = "flex";
-    } else {
-      alert(data.error || "Login failed");
-    }
-  } catch (err) {
-    console.error(err);
-  }
-});
 let isLogin = true;
 
 function toggleLoginSignup(e) {
@@ -51,6 +24,45 @@ function toggleLoginSignup(e) {
 document
   .getElementById("toggleLink")
   .addEventListener("click", toggleLoginSignup);
+
+document.getElementById("loginForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  try {
+    let response;
+    if (isLogin === true) {
+      response = await fetch("http://localhost:8000/user/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+        credentials: "include",
+      });
+    } else {
+      response = await fetch("http://localhost:8000/user/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+        credentials: "include",
+      });
+    }
+
+    const data = await response.json();
+
+    if (response.ok) {
+      document.getElementById("loginSection").style.display = "none";
+      document.getElementById("nav").style.display = "block";
+      document.getElementById("main").style.display = "flex";
+    } else {
+      alert(data.error || (isLogin ? "Login failed" : "Signup failed"));
+    }
+  } catch (err) {
+    console.error(err);
+    alert("An error occurred! Please try again");
+  }
+});
 
 const api_url = "http://localhost:8000/api/quotes";
 

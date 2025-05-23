@@ -6,10 +6,11 @@ async function handleSignup(req, res) {
   console.log(email, password);
 
   if (!email || !password)
-    return res.status(400).json("Enter email or password");
+    return res.status(400).json({ error: "Enter email or password" });
 
   const userExists = await userModel.findOne({ email });
-  if (userExists) return res.status(400).json("email already registered");
+  if (userExists)
+    return res.status(400).json({ error: "email already registered" });
 
   try {
     const newUser = await userModel.create({
@@ -29,9 +30,9 @@ async function handleLogin(req, res) {
   console.log(email, password);
 
   try {
-    const user = await userModel.findOne({ email });
+    const user = await userModel.findOne({ email, password });
     if (!user)
-      return res.status(400).json({ error: "Invalid email or password" });
+      return res.status(400).json({ error: "Incorrect email or password" });
 
     const token = setUser(user);
     res.cookie("uid", token);

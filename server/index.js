@@ -7,6 +7,7 @@ const diary = require("./routes/diary.js");
 const cors = require("cors");
 const { connectMongoDB } = require("./database/connect.js");
 const userService = require("./routes/user.js");
+const cookieParser = require("cookie-parser");
 
 app.use(
   cors({
@@ -14,6 +15,7 @@ app.use(
     credentials: true,
   })
 );
+app.use(cookieParser());
 app.use(express.json());
 connectMongoDB()
   .then(() => console.log("MongoDB Connected!"))
