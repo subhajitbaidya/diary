@@ -187,3 +187,9 @@ Replacing the entire content of the #toggletext element, including the `<a>` tag
 - JavaScript does not automatically attach event listeners to newly created elements. That’s why after modifying .innerHTML, you need to do this again:
 
 `document.getElementById("toggleLink").addEventListener("click", toggleLoginSignup);`
+
+# Microservice migration plan
+https://microservices.io/refactoring/index.html
+
+- We will follow a monolith strangle approach
+
