@@ -18,7 +18,12 @@ async function handleSignup(req, res) {
       password,
     });
 
-    setUser(newUser);
+    const token = setUser(newUser);
+    res.cookie("uid", token, {
+      httpOnly: true,
+      secure: false,
+      sameSite: "Lax",
+    });
 
     res.status(201).json(newUser);
   } catch (error) {
@@ -35,7 +40,14 @@ async function handleLogin(req, res) {
       return res.status(400).json({ error: "Incorrect email or password" });
 
     const token = setUser(user);
-    res.cookie("uid", token);
+    console.log(token);
+    res.cookie("uid", token, {
+      httpOnly: true,
+      secure: false,
+      sameSite: "Lax",
+      maxAge: 24 * 60 * 60 * 1000,
+    });
+
     res.status(201).json({ email: email, password: password });
   } catch (error) {
     throw new Error(error);

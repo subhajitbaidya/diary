@@ -8,6 +8,8 @@ const cors = require("cors");
 const { connectMongoDB } = require("./database/connect.js");
 const userService = require("./routes/user.js");
 const cookieParser = require("cookie-parser");
+const { authenticateUser } = require("./middlewares/auth.js");
+const Session = require("./routes/auth.js");
 
 app.use(
   cors({
@@ -21,6 +23,7 @@ connectMongoDB()
   .then(() => console.log("MongoDB Connected!"))
   .catch((err) => console.error("MongoDB error", error));
 app.use(express.urlencoded({ extended: true }));
+app.use("/session", Session);
 app.use("/user", userService);
 app.use("/api", quote);
 app.use("/api/diary", diary);
