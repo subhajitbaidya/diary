@@ -1,4 +1,4 @@
-const userModel = require("../models/user.js");
+const userModel = require("../models/User.js");
 const { setUser } = require("../utils/jwt.js");
 
 async function handleSignup(req, res) {
@@ -19,13 +19,17 @@ async function handleSignup(req, res) {
     });
 
     const token = setUser(newUser);
-    res.cookie("uid", token, {
+    res.cookie("token", token, {
       httpOnly: true,
       secure: false,
       sameSite: "Lax",
     });
 
-    res.status(201).json(newUser);
+    res.status(201).json({
+      message: "User created successfully",
+      email: newUser.email,
+      token: token,
+    });
   } catch (error) {
     throw new Error(error);
   }
@@ -41,14 +45,18 @@ async function handleLogin(req, res) {
 
     const token = setUser(user);
     console.log(token);
-    res.cookie("uid", token, {
+    res.cookie("token", token, {
       httpOnly: true,
       secure: false,
       sameSite: "Lax",
-      maxAge: 24 * 60 * 60 * 1000,
+      maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
-    res.status(201).json({ email: email, password: password });
+    res.status(200).json({
+      message: "Login successful",
+      email: user.email,
+      token: token,
+    });
   } catch (error) {
     throw new Error(error);
   }

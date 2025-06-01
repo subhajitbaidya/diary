@@ -1,19 +1,23 @@
-const userModel = require("../models/user.js");
+const userModel = require("../models/User.js");
+const { getUser } = require("../utils/jwt.js");
 // Soft check if user exists
 async function CheckUser(req, res) {
-  const user = req.user;
-  console.log("Session auth hit. Cookies:", req.cookies);
-  if (!user) return res.status(400).json({ error: "Not logged in" });
-
   try {
-    const dbUser = await userModel.findById(user._id).select("-password");
-    if (dbUser) {
-      req.user = user;
-    }
-  } catch (error) {
-    console.error("checkAuth error:", error);
-  }
+    // Optionally fetch fresh user data from database
+    const user = await User.findById(req.user.userId).select("-password");
 
-  res.status(200).json({ user: user });
+    if (!user) {
+      return res
+        .status(401)
+        .json({ success: false, message: "User not found" });
+    }
+
+    res.json({
+      success: true,
+      user: { id: user._id, email: user.email },
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Server error" });
+  }
 }
 module.exports = { CheckUser };

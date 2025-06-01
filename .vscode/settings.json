@@ -1,14 +1,15 @@
 {
-    "liveServer.settings.port": 5501,
-    "cSpell.words": [
-        "baidya",
-        "getquotes",
-        "loginbutton",
-        "loginform",
-        "loginlogo",
-        "randombox",
-        "Signup",
-        "subhajit",
-        "toggletext"
-    ]
+  "liveServer.settings.port": 5503,
+  "cSpell.words": [
+    "baidya",
+    "getquotes",
+    "loginbutton",
+    "loginform",
+    "loginlogo",
+    "randombox",
+    "resave",
+    "Signup",
+    "subhajit",
+    "toggletext"
+  ]
 }

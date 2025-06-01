@@ -1,22 +1,24 @@
 const { getUser } = require("../utils/jwt.js");
+const userModel = require("../models/User.js");
+// JWT Authentication Middleware
+const requireAuth = async (req, res, next) => {
+  const token = req.cookies.token;
+  console.log("token", token);
 
-function authenticateUser(req, res, next) {
-  const token = req.cookies.uid;
-  if (!token) return res.status(400).json({ error: "Unauthorized" });
+  if (!token) {
+    return res
+      .status(401)
+      .json({ success: false, message: "No token provided" });
+  }
 
-  const user = getUser(token);
-  if (!user) return res.status(400).json({ error: "Invalid or expired token" });
-
-  req.user = user;
-  next();
-}
-
-async function checkAuth(req, res, next) {
-  const userUid = req.cookies?.uid;
-  const user = getUser(userUid);
-
-  req.user = user || null;
-  next();
-}
-
-module.exports = { authenticateUser, checkAuth };
+  try {
+    const decoded = getUser(token);
+    req.user = decoded;
+    next();
+  } catch (error) {
+    return res.status(401).json({ success: false, message: "Invalid token" });
+  }
+};
+module.exports = {
+  requireAuth,
+};

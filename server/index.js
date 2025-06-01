@@ -8,22 +8,24 @@ const cors = require("cors");
 const { connectMongoDB } = require("./database/connect.js");
 const userService = require("./routes/user.js");
 const cookieParser = require("cookie-parser");
-const { authenticateUser } = require("./middlewares/auth.js");
 const Session = require("./routes/auth.js");
 
 app.use(
   cors({
-    origin: "http://127.0.0.1:5501",
+    origin: "http://127.0.0.1:5503", // your frontend
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 app.use(cookieParser());
+
 app.use(express.json());
+app.use("/session", Session);
 connectMongoDB()
   .then(() => console.log("MongoDB Connected!"))
-  .catch((err) => console.error("MongoDB error", error));
+  .catch((err) => console.error("MongoDB error", err));
 app.use(express.urlencoded({ extended: true }));
-app.use("/session", Session);
 app.use("/user", userService);
 app.use("/api", quote);
 app.use("/api/diary", diary);
